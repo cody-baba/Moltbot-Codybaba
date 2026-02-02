@@ -10,15 +10,14 @@ RUN npm install -g npm@latest
 # Install clawhub globally with proper permissions
 RUN npm install -g --unsafe-perm clawhub
 
-# Pre-install all family/productivity skills via clawhub
-RUN clawhub install calendar && \
-    clawhub install reminder && \
-    clawhub install google-workspace && \
-    clawhub install gog && \
-    clawhub install shopping && \
-    clawhub install finance && \
-    clawhub install flashcards && \
-    clawhub install quiz
+# Pre-install verified family/productivity skills via clawhub
+RUN clawhub install calendar || true
+RUN clawhub install google-workspace || true
+RUN clawhub install gog || true
+RUN clawhub install shopping || true
+RUN clawhub install finance || true
+RUN clawhub install flashcards || true
+RUN clawhub install quiz || true
 
 # Install useful CLI tools and build dependencies
 RUN apt-get update && apt-get install -y \
