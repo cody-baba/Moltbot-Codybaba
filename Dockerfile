@@ -24,10 +24,7 @@ RUN apt-get update && apt-get install -y \
     curl jq git unzip nano \
     net-tools iputils-ping dnsutils \
     build-essential pkg-config libssl-dev libffi-dev \
-    python3 python3-pip
-
-# Optional: Python requests for API-based skills
-RUN pip install requests
+    python3 python3-pip python3-requests
 
 # Optional: Node.js developer utilities for TypeScript-based skills
 RUN npm install -g typescript ts-node nodemon
