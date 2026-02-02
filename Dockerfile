@@ -1,5 +1,5 @@
 # Use the official Moltbot image as base
-FROM ghcr.io/openclaw/moltbot:latest
+FROM ghcr.io/openclaw/moltbot
 
 # Install clawhub globally (npm-based)
 RUN npm install -g clawhub
