@@ -10,14 +10,23 @@ RUN npm install -g npm@latest
 # Install clawhub globally with proper permissions
 RUN npm install -g --unsafe-perm clawhub
 
-# Pre-install verified family/productivity skills via clawhub
+# Pre-install all verified Clawhub skills
 RUN clawhub install calendar || true
 RUN clawhub install google-workspace || true
-RUN clawhub install gog || true
-RUN clawhub install shopping || true
 RUN clawhub install finance || true
-RUN clawhub install flashcards || true
-RUN clawhub install quiz || true
+RUN clawhub install gog || true
+RUN clawhub install gogcli || true
+RUN clawhub install shopping-expert || true
+RUN clawhub install bring-shopping || true
+RUN clawhub install bring-add || true
+RUN clawhub install gurkerl || true
+RUN clawhub install gurkerlcli || true
+RUN clawhub install agentic-spicy-food || true
+RUN clawhub install wishfinity || true
+RUN clawhub install anylist || true
+RUN clawhub install agentic-commerce || true
+RUN clawhub install language-learning || true
+RUN clawhub install japanese-tutor || true
 
 # Install useful CLI tools and build dependencies
 RUN apt-get update && apt-get install -y \
