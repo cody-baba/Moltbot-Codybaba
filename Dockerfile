@@ -1,11 +1,47 @@
 # Use the official Moltbot image with the correct tag
 FROM ghcr.io/openclaw/moltbot:main
 
-# Install clawhub globally (npm-based)
-RUN npm install -g clawhub
+# Switch to root to install global packages
+USER root
 
-# Expose port if Moltbot needs it
+# Upgrade npm to latest (avoids old bugs)
+RUN npm install -g npm@latest
+
+# Install clawhub globally with proper permissions
+RUN npm install -g --unsafe-perm clawhub
+
+# Pre-install all family/productivity skills via clawhub
+RUN clawhub install calendar && \
+    clawhub install reminder && \
+    clawhub install google-workspace && \
+    clawhub install gog && \
+    clawhub install shopping && \
+    clawhub install finance && \
+    clawhub install flashcards && \
+    clawhub install quiz
+
+# Install useful CLI tools and build dependencies
+RUN apt-get update && apt-get install -y \
+    curl jq git unzip nano \
+    net-tools iputils-ping dnsutils \
+    build-essential pkg-config libssl-dev libffi-dev \
+    python3 python3-pip
+
+# Optional: Python requests for API-based skills
+RUN pip install requests
+
+# Optional: Node.js developer utilities for TypeScript-based skills
+RUN npm install -g typescript ts-node nodemon
+
+# Switch back to non-root user for safety
+USER node
+
+# Expose Moltbot port
 EXPOSE 3000
+
+# Healthcheck for container monitoring
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s \
+  CMD curl -f http://localhost:3000/health || exit 1
 
 # Default command to start Moltbot
 CMD ["npm", "start"]
