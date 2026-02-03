@@ -27,6 +27,11 @@ RUN clawhub install anylist || true
 RUN clawhub install agentic-commerce || true
 RUN clawhub install language-learning || true
 RUN clawhub install japanese-tutor || true
+RUN clawhub install chrome-enterprise || true   # ✅ Chrome browser & ChromeOS management
+RUN clawhub install pdf-tools || true           # ✅ PDF generation & parsing
+RUN clawhub install google-maps || true         # ✅ Google Maps & Location APIs
+RUN clawhub install outlook || true             # ✅ Microsoft Outlook integration
+RUN clawhub install office || true              # ✅ Microsoft Office (Word, Excel, PowerPoint)
 
 # Install useful CLI tools and build dependencies
 RUN apt-get update && apt-get install -y \
